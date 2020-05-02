@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Spinner from './Spinner';
 import SeasonDisplay from './SeasonDisplay';
 
 class App extends React.Component {
@@ -28,16 +29,9 @@ class App extends React.Component {
 		);
 	}
 
-	// life-cycle method run EVERY TIME a component is updated (e.g. state changes, new props passed in from parent)
-	// componentDidUpdate() {	}
-
-	// life-cycle method run when the component is about to be removed from the screen if/when there is cleanup that needs to be done
-	// typically was used when React was being used with other non-React libraries
-	// newer features of React have lessened the need to use this life-cycle method
-	// componentWillUnmount() { }
-
-	// render function must be defined and return JSX
-	render() {
+	// factor out conditional logic from the render() function
+	// prefer not to have such logic there to make the component more flexible
+	renderContent() {
 		// conditional rendering - return variable JSX based on the state of...state
 		if (this.state.errorMessage && !this.state.latitude) {
 			return (
@@ -54,8 +48,25 @@ class App extends React.Component {
 
 		// default return
 		return (
+			<Spinner spinnerText="Please accept location request..." size="huge" />
+		);
+	}
+
+	// life-cycle method run EVERY TIME a component is updated (e.g. state changes, new props passed in from parent)
+	// componentDidUpdate() {	}
+
+	// life-cycle method run when the component is about to be removed from the screen if/when there is cleanup that needs to be done
+	// typically was used when React was being used with other non-React libraries
+	// newer features of React have lessened the need to use this life-cycle method
+	// componentWillUnmount() { }
+
+	// render function must be defined and return JSX
+	// conditional rendering logic is factored out into a separate function
+	// this gives us the flexibility to wrap the conditional content in some common content and keeps our render() function cleaner
+	render() {
+		return (
 			<div>
-				Loading
+				{ this.renderContent() }
 			</div>
 		);
 	}
