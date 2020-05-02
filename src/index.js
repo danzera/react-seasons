@@ -15,7 +15,11 @@ class App extends React.Component {
 			errorMessage: '',
 			latitude: null
 		};
+	}
 
+	// life-cycle method run ONCE after the component is initially rendered
+	// conventionally this is where initial data loading is done
+	componentDidMount() {
 		// make async call to browser geolocation API
 		window.navigator.geolocation.getCurrentPosition(
 			// success callback
@@ -30,6 +34,14 @@ class App extends React.Component {
 			}
 		);
 	}
+
+	// life-cycle method run EVERY TIME a component is updated (e.g. state changes, new props passed in from parent)
+	// componentDidUpdate() {	}
+
+	// life-cycle method run when the component is about to be removed from the screen if/when there is cleanup that needs to be done
+	// typically was used when React was being used with other non-React libraries
+	// newer features of React have lessened the need to use this life-cycle method
+	// componentWillUnmount() { }
 
 	// render function must be defined and return JSX
 	render() {
