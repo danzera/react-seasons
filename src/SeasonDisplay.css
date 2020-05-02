@@ -1,0 +1,49 @@
+.season-display {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+.icon-left {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.icon-right {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.season-display.spring i {
+	color: green;
+}
+
+.spring {
+	background-color: greenyellow;
+}
+
+.season-display.summer i {
+	color: yellow;
+}
+
+.summer {
+	background-color: red;
+}
+
+.season-display.autumn i {
+	color: mediumaquamarine;
+}
+
+.autumn {
+	background-color: navajowhite;
+}
+
+.season-display.winter i {
+	color: blue;
+}
+
+.winter {
+	background-color: aqua;
+}

@@ -3,19 +3,12 @@ import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
 
 class App extends React.Component {
-	// constructor function (optional), not React-specific
-	// called before anything else and is one method of initializing state
-	constructor(props) {
-		// super() must be initially called with props for all class based components to call parent constructor
-		// app will bomb out if super() is not called
-		super(props);
-
-		// initialize state object with default values
-		this.state = {
-			errorMessage: '',
-			latitude: null
-		};
-	}
+	// can omit the constructor function and initialize state like so
+	// Babel handles implementation of constructor function for us
+	state = {
+		errorMessage: '',
+		latitude: null
+	};
 
 	// life-cycle method run ONCE after the component is initially rendered
 	// conventionally this is where initial data loading is done
@@ -55,11 +48,8 @@ class App extends React.Component {
 		}
 		
 		if (!this.state.errorMessage && this.state.latitude) {
-			return (
-				<div>
-					Latitude: { this.state.latitude }
-				</div>
-			);
+			// taking state from this component and passing it down to a child component as a prop
+			return <SeasonDisplay latitude={ this.state.latitude } />;
 		}
 
 		// default return
