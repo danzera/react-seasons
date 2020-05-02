@@ -12,10 +12,11 @@ class App extends React.Component {
 
 		// initialize state object with default values
 		this.state = {
+			errorMessage: '',
 			latitude: null
 		};
 
-		// make async call to browser geolocation service
+		// make async call to browser geolocation API
 		window.navigator.geolocation.getCurrentPosition(
 			// success callback
 			position => {
@@ -23,14 +24,38 @@ class App extends React.Component {
 				// pass in an object to that function with the key-values that you want to update
 				this.setState({ latitude: position.coords.latitude });
 			},
-			// failure callback
-			err => console.log(err)
+			// error callback
+			err => {
+				this.setState({ errorMessage: err.message });
+			}
 		);
 	}
 
 	// render function must be defined and return JSX
 	render() {
-		return <div>Latitude: { this.state.latitude }</div>
+		// conditional rendering - return variable JSX based on the state of...state
+		if (this.state.errorMessage && !this.state.latitude) {
+			return (
+				<div>
+					Error: { this.state.errorMessage }
+				</div>
+			);
+		}
+		
+		if (!this.state.errorMessage && this.state.latitude) {
+			return (
+				<div>
+					Latitude: { this.state.latitude }
+				</div>
+			);
+		}
+
+		// default return
+		return (
+			<div>
+				Loading
+			</div>
+		);
 	}
 }
 
